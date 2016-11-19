@@ -52,7 +52,7 @@ func loadPageMod(title string) (*Page, error) {
 }
 
 func main() {
-	p1 := &Page{Title: "TestPage", Body []byte("This is a sample Page.")}
+	p1 := &Page{Title: "TestPage", Body: []byte("This is a sample Page.")}
 	p1.save()
 	p2 := loadPage("TestPage")
 	fmt.Println(string(p2.Body))
