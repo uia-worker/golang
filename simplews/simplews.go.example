@@ -1,0 +1,29 @@
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hi there, what do you want me to do with %s?", r.URL.Path[1:])
+}
+
+/*
+  * http.HandleFunc tells the http package to handle all requests to the web root
+	("/") with handler function
+	* http.ListenAndServe specifies that server should listen on port 8585 on any
+	interface (second parameter?); function blocks until the program is terminated
+	handler is of the type http.HandlerFunc
+	* http.ResponseWriter - by writing to this instance, we send data to the HTTP
+	client
+	* http.Request - data structure that represents the client HTTP request
+	* r.URL.Path - path component of the request URL (trailing [1:] means create
+  a sub-slice of Path from the 1st character to the end to drop leading "/")
+	* http://localhost:8585/monkeys
+
+*/
+func main() {
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":8585", nil)
+}
